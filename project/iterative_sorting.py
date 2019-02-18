@@ -101,3 +101,10 @@ print(count_sort([3,2,1,4,2,2], 5))
 print(count_sort([1, 5, 8, 4, 2, 9, 6, 0, 3, 7], 10))
 print(count_sort([], 10))
 print(count_sort([1, 5, -2, 4, 3], 5))
+
+# Bogo sort
+'''
+Bogo sort checks if a list is already in order.
+If it isn't, it randomly reorganizes the elements in the list and checks again.
+The function will randomly reorganizes the list until it happens to place them in order.
+'''
