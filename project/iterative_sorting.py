@@ -45,7 +45,21 @@ def insertion_sort( arr ):
 # print(arr)
 
 # STRETCH: implement the Bubble Sort function below
+# repeatedly swapping the adjacent elements if they are in wrong order
 def bubble_sort( arr ):
+
+    for i in range(len(arr)):
+        swapped = False
+
+        for j in range(i, len(arr)):
+            if arr[i] > arr[j]:
+                temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+                swapped = True
+        
+        if not swapped:
+            return arr 
 
     return arr
 
