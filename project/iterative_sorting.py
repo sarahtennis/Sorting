@@ -65,6 +65,39 @@ def bubble_sort( arr ):
 
 
 # STRETCH: implement the Count Sort function below
+# Counting sort works by iterating through the input,
+# counting the number of times each item occurs,
+# and using those counts to compute an item's index in the final, sorted array.
 def count_sort( arr, maximum=-1 ):
+    if not len(arr):
+        return []
 
-    return arr
+    if maximum < 0:
+        maximum = max(arr) + 1
+
+    if maximum >= 0:
+        count = [0] * (maximum + 1)
+    else:
+        return "Error, negative numbers not allowed in Count Sort"
+    
+    for num in arr:
+        if num >= 0:
+            count[num] += 1
+        else:
+            return "Error, negative numbers not allowed in Count Sort"
+            
+
+    output = []
+    for i in range(maximum):
+        freq = count[i]
+        while freq:
+            output.append(i)
+            freq -= 1
+
+
+    return output
+
+print(count_sort([3,2,1,4,2,2], 5))
+print(count_sort([1, 5, 8, 4, 2, 9, 6, 0, 3, 7], 10))
+print(count_sort([], 10))
+print(count_sort([1, 5, -2, 4, 3], 5))
