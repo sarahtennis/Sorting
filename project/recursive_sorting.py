@@ -89,28 +89,33 @@ def quick_sort( arr, low, high ):
 # print(quick_sort(arr1, 0, len(arr1)-1))
 
 '''
-[1, !!5, 8, 4, 2, 9, 6, 0, 3!!, 7] -- 5 is greater, 0 is less so swap
-[1, !!0, 8, 4, 2, 9, 6, 5!!, 3, 7] - keep moving right and left indices as possible
-[1, !!0, 8!!, 4, 2, 9, 6, 5, 3, 7] -- left and right meet at 0, swap pivot and 0
-[0, 1p, 8, 4, 2, 9, 6, 5, 3, 7] -- break into recursion based on final index for pivot
-[0] 1 [8, 4, 2, 9, 6, 5, 3, 7] -- len([0]) = 1 so it is in position (no more recursion on left)
-0 1 [8, 4, 2, !!9, 6, 5, 3, 7!!] - 9 is greater, 7 is less so swap
-0 1 [8, 4, 2, !!7, 6, 5, 3, 9!!] - keep moving
-0 1 [8, 4, 2, 7, 6, 5, 3!!, !!9] - right < left, swap pivot with right
-0 1 [3, 4, 2, 7, 6, 5, 8p, 9] - recursion
-0 1 [3, 4, 2, 7, 6, 5] 8 [9] - len([9]) = 1 stop recursion on right of 8
-0 1 [3, !!4, 2!!, 7, 6, 5] 8 9 - right > left, swap
-0 1 [3, !!2, 4!!, 7, 6, 5] 8 9 - continue moving
-0 1 [3, 2!!, 4!!, 7, 6, 5] 8 9 - left > right, swap pivot with right
-0 1 [2, 3p, 4, 7, 6, 5] 8 9 - recursion
-0 1 [2] 3 [4, 7, 6, 5] 8 9 - len([2]) = 1, correct place
-0 1 2 3 [4!!, !!7, 6, 5] 8 9 - left > right, pivot at right
-0 1 2 3 [4p, 7, 6, 5] 8 9 - recursion
-0 1 2 3 4 [7, 6, 5] 8 9
-0 1 2 3 4 [7, 6, !!5!!] 8 9 
-0 1 2 3 4 [5, 6, 7p] 8 9
-0 1 2 3 4 [5, 6] 7 8 9
-0 1 2 3 4 [5!!, !!6] 7 8 9
+[1piv, !!5, 8, 4, 2, 9, 6, 0, 3, 7!!] - move as far as possible
+[1piv, !!5, 8, 4, 2, 9, 6, 0!!, 3, 7] - right > left, swap right/left
+[1piv, !!0, 8, 4, 2, 9, 6, 5!!, 3, 7] - move as far as possible
+[1piv, 0!!, !!8, 4, 2, 9, 6, 5, 3, 7] - left > right, swap pivot/right
+[0, 1piv, 8, 4, 2, 9, 6, 5, 3, 7] - recursion on arr divided by pivot's correct index
+[0piv] 1 [8piv, 4, 2, 9, 6, 5, 3, 7] - lhs is done, move rhs
+0 1 [8piv, 4, 2, !!9, 6, 5, 3, 7!!] - right > left, swap right/left
+0 1 [8piv, 4, 2, !!7, 6, 5, 3, 9!!] - keep moving
+0 1 [8piv, 4, 2, 7, 6, 5, 3!!, !!9] - left > right, swap pivot/right
+0 1 [3, 4, 2, 7, 6, 5, 8piv, 9] - recursion on arr divided by pivot's correct index
+0 1 [3piv, 4, 2, 7, 6, 5] 8 [9piv] - rhs done, move lhs
+0 1 [3piv, !!4, 2!!, 7, 6, 5] 8 9 - right > left, swap left/right
+0 1 [3piv, !!2, 4!!, 7, 6, 5] 8 9 - keep moving
+0 1 [3piv, 2!!, !!4, 7, 6, 5] 8 9 - left > right, swap pivot/right
+0 1 [2, 3piv, 4, 7, 6, 5] 8 9 - recursion on arr divided by pivot's correct index
+0 1 [2piv] 3 [4piv, 7, 6, 5] 8 9 - lhs done, move rhs
+0 1 2 3 [4piv!!, !!7, 6, 5] 8 9 - left > right, swap pivot/right
+0 1 2 3 [4piv, 7, 6, 5] 8 9 - recursion on arr divided by pivot's correct index
+0 1 2 3 [] 4 [7piv, 6, 5] 8 9 - lhs low=high, move rhs
+0 1 2 3 4 [7piv, 6, 5!! (!!)] 8 9 - left > right (left not index of arr), swap pivot/right
+0 1 2 3 4 [5, 6, 7piv] 8 9 - recursion on arr divided by pivot's correct index
+0 1 2 3 4 [5piv, 6] 7 [] 8 9 - lhs move, rhs low=high
+0 1 2 3 4 [5piv!!, !!6] 7 8 9 - left > right, swap pivot/right
+0 1 2 3 4 [5piv, 6] 7 8 9 - recursion on arr divided by pivot's correct index
+0 1 2 3 4 5 [] [6piv] 7 8 9 - lhs low=high, rhs move
+0 1 2 3 4 5 [(!!) 6piv (!!)] 7 8 9 - left > right (left/right not indices of arr), swap pivot/right
+0 1 2 3 4 5 [6piv] 7 8 9 - recursion done, return array
 0 1 2 3 4 5 6 7 8 9
 '''
 
